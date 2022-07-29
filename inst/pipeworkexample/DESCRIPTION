@@ -1,0 +1,19 @@
+Package: pipeworkexample
+Title: A cunning plumber API
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "firstname",
+           family = "lastname",
+           role = c("aut", "cre"),
+           email = "your@email.com")
+Description: What the package does (one paragraph).
+License: What license is it under?
+Imports: 
+    plumber,
+    yaml
+Suggests: 
+    httr,
+    testthat
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.1
