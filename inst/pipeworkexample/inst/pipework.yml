@@ -1,0 +1,5 @@
+handles:
+  health:
+    methods: GET
+    path: /health
+    handler: health
