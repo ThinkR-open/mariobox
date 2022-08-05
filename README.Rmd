@@ -11,6 +11,17 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+
+cat_pipework_yaml <- function(path_pipo) {
+  cat(
+    paste0(
+      readLines(
+        file.path(path_pipo, "inst/pipework.yml")
+      ),
+      "\n"
+    )
+  )
+}
 ```
 
 # {pipework}
@@ -34,8 +45,59 @@ remotes::install_github("ThinkR-Open/pipework")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+```{r}
+library(pipework)
+```
 
-```{r example}
-# library(pipework)
+### Creating a new pipework project:
+
+```{r}
+path_pipo <- tempfile(pattern = "pipo")
+create_pipework(
+  path = path_pipo,
+  open = FALSE
+)
+```
+
+```{r}
+fs::dir_tree(path_pipo)
+```
+
+```{r, echo=FALSE}
+cat_pipework_yaml(path_pipo)
+```
+
+### Add/Remove endpoints
+
+```{r}
+pw_add_endpoint(
+  name = "allo",
+  methods  = "GET",
+  open = FALSE,
+  pkg = path_pipo
+)
+```
+
+```{r}
+fs::dir_tree(path_pipo)
+```
+
+```{r, echo=FALSE}
+cat_pipework_yaml(path_pipo)
+```
+
+```{r}
+pw_remove_endpoint(
+  name = "allo",
+  pkg = path_pipo
+)
+```
+
+
+```{r}
+fs::dir_tree(path_pipo)
+```
+
+```{r, echo=FALSE}
+cat_pipework_yaml(path_pipo)
 ```
