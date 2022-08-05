@@ -1,4 +1,15 @@
 
+#' Manage endpoints
+#'
+#' Add or remove endpoints in a pipework project.
+#'
+#' @param name A character string. The name of the endpoint.
+#' @param methods A character string. The name of the rest methods.
+#' @param open A logical. Should the project be exported or not?
+#' @param pkg A character string. The path to package root.
+#'
+#' @return Nothing. Used for its side effect.
+#'
 #' @importFrom yaml read_yaml write_yaml
 #' @importFrom here here
 #' @importFrom usethis use_r use_test
@@ -6,6 +17,30 @@
 #' @importFrom cli cli_alert_danger
 #'
 #' @export
+#'
+#' @rdname manage_endpoints
+#'
+#' @examples
+#' \dontrun{
+#' # Create a new pipework project
+#' path_pipo <- tempfile(pattern = "pipo")
+#' create_pipework(
+#'   path = path_pipo,
+#'   open = FALSE
+#' )
+#' # Add an endpoint
+#' pw_add_endpoint(
+#'   name = "allo",
+#'   methods = "GET",
+#'   open = FALSE,
+#'   pkg = path_pipo
+#' )
+#' # Remove endpoint
+#' pw_remove_endpoint(
+#'   name = "allo",
+#'   pkg = path_pipo
+#' )
+#' }
 pw_add_endpoint <- function(
   name,
   methods = "GET",
@@ -65,9 +100,10 @@ pw_add_endpoint <- function(
     name = fct_name,
     open = open
   )
-  return(invisible(f_path))
 }
 
+#' @name manage_endpoints
+#' @export
 pw_remove_endpoint <- function(
   name,
   pkg = "."

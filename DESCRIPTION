@@ -17,6 +17,8 @@ Imports:
     utils,
     yaml
 Suggests: 
+    httr,
+    plumber,
     rcmdcheck,
     testthat (>= 3.0.0),
     withr

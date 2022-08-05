@@ -1,10 +1,34 @@
 
-
+#' Create a {pipework} project to package a {plumber} API
+#'
+#' This function will create a prepopulated package
+#' with all the necessary elements to publish a {plumber} API as a package.
+#'
+#' @param path A character string indicating the path (folder) where to create
+#' the package in. The folder name will also be used as the package name.
+#' @param open A logical. Should the new project be open?
+#' @param overwrite A logical. Should the already existing project be overwritten ?
+#' @param package_name Package name to use. By default, {pipework} uses
+#' `basename(path)`. If `path == '.'` & `package_name` is not explicitly set,
+#' then `basename(getwd())` will be used.
+#'
+#' @return The path to the project. Invisibly
+#'
 #' @importFrom cli cat_rule cat_line
 #' @importFrom utils getFromNamespace
 #' @importFrom rstudioapi isAvailable openProject hasFun
 #' @importFrom usethis create_project
 #' @importFrom fs dir_copy
+#'
+#' @export
+#'
+#' @examples
+#' path_pipo <- tempfile(pattern = "pipo")
+#' create_pipework(
+#'   path = path_pipo,
+#'   open = FALSE
+#' )
+#'
 create_pipework <- function(
   path,
   # check_name = TRUE,
@@ -25,7 +49,7 @@ create_pipework <- function(
         paste(
           "Project directory already exists. \n",
           "Set `create_pipework(overwrite = TRUE)` to overwrite anyway.\n",
-          "Be careful this will restore a brand new golem. \n",
+          "Be careful this will restore a brand new pipework project. \n",
           "You might be at risk of losing your work !"
         ),
         call. = FALSE

@@ -4,6 +4,8 @@ is_properly_populated_pipework <- function(path) {
   # All files excepts *.Rproj which changes based on the project name
   expected_files <- c(
     "DESCRIPTION",
+    "LICENSE",
+    "LICENSE.md",
     "dev/run_dev.R",
     "inst/pipework.yml",
     "man/run_api.Rd",
@@ -47,6 +49,8 @@ path_pkg <- create_pipework(
 
 usethis::with_project(dummy_pipework_path, {
   test_that("create_pipework() works", {
+    usethis::use_mit_license(copyright_holder = "Babar")
+
     check_output <- rcmdcheck::rcmdcheck(
       # path = dummy_pipework_path,
       quiet = TRUE,
@@ -57,13 +61,15 @@ usethis::with_project(dummy_pipework_path, {
       check_output[["errors"]],
       character(0)
     )
-    expect_length(
-      keep_only_non_pdf_related_warnings(check_output[["warnings"]]),
+    expect_lte(
+      length(
+        keep_only_non_pdf_related_warnings(check_output[["warnings"]])
+      ),
       1
     )
-    expect_true(
-      grepl("license", check_output[["warnings"]][1])
-    )
+    if (length(check_output[["warnings"]]) == 1) {
+      expect_true(grepl("there is no package called", check_output[["warnings"]]))
+    }
     expect_lte(
       length(check_output[["notes"]]),
       1

@@ -26,8 +26,138 @@ remotes::install_github("ThinkR-Open/pipework")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+``` r
+library(pipework)
+```
+
+### Creating a new pipework project:
 
 ``` r
-# library(pipework)
+path_pipo <- tempfile(pattern = "pipo")
+create_pipework(
+  path = path_pipo,
+  open = FALSE
+)
+#> ── Creating dir ────────────────────────────────────────────────────────────────
+#> ✔ Creating '/tmp/RtmpaExIU6/pipofc3e355c5196/'
+#> ✔ Setting active project to '/tmp/RtmpaExIU6/pipofc3e355c5196'
+#> ✔ Creating 'R/'
+#> ✔ Writing a sentinel file '.here'
+#> • Build robust paths within your project via `here::here()`
+#> • Learn more at <https://here.r-lib.org>
+#> ✔ Setting active project to '<no active project>'
+#> ✔ Created package directory
+#> ── Copying package skeleton ────────────────────────────────────────────────────
+#> ✔ Copied app skeleton
+#> ── Done ────────────────────────────────────────────────────────────────────────
+#> A new pipework named pipofc3e355c5196 was created at /tmp/RtmpaExIU6/pipofc3e355c5196 .
 ```
+
+``` r
+fs::dir_tree(path_pipo)
+#> /tmp/RtmpaExIU6/pipofc3e355c5196
+#> ├── DESCRIPTION
+#> ├── NAMESPACE
+#> ├── R
+#> │   ├── fct_health.R
+#> │   └── run_plumber.R
+#> ├── dev
+#> │   └── run_dev.R
+#> ├── inst
+#> │   └── pipework.yml
+#> ├── man
+#> │   └── run_api.Rd
+#> └── tests
+#>     ├── testthat
+#>     │   ├── test-health.R
+#>     │   └── test-run_plumber.R
+#>     └── testthat.R
+```
+
+    #> handles:
+    #>    health:
+    #>      methods: GET
+    #>      path: /health
+    #>      handler: health
+
+### Add/Remove endpoints
+
+``` r
+pw_add_endpoint(
+  name = "allo",
+  methods  = "GET",
+  open = FALSE,
+  pkg = path_pipo
+)
+#> ✔ Setting active project to '/home/bob/projects/pipework'
+#> • Edit 'R/fct_allo.R'
+#> • Call `use_test()` to create a matching test file
+#> ✔ Writing 'tests/testthat/test-fct_allo.R'
+#> • Edit 'tests/testthat/test-fct_allo.R'
+```
+
+``` r
+fs::dir_tree(path_pipo)
+#> /tmp/RtmpaExIU6/pipofc3e355c5196
+#> ├── DESCRIPTION
+#> ├── NAMESPACE
+#> ├── R
+#> │   ├── fct_allo.R
+#> │   ├── fct_health.R
+#> │   └── run_plumber.R
+#> ├── dev
+#> │   └── run_dev.R
+#> ├── inst
+#> │   └── pipework.yml
+#> ├── man
+#> │   └── run_api.Rd
+#> └── tests
+#>     ├── testthat
+#>     │   ├── test-health.R
+#>     │   └── test-run_plumber.R
+#>     └── testthat.R
+```
+
+    #> handles:
+    #>    health:
+    #>      methods: GET
+    #>      path: /health
+    #>      handler: health
+    #>    allo:
+    #>      methods: GET
+    #>      path: /allo
+    #>      handler: allo
+
+``` r
+pw_remove_endpoint(
+  name = "allo",
+  pkg = path_pipo
+)
+```
+
+``` r
+fs::dir_tree(path_pipo)
+#> /tmp/RtmpaExIU6/pipofc3e355c5196
+#> ├── DESCRIPTION
+#> ├── NAMESPACE
+#> ├── R
+#> │   ├── fct_health.R
+#> │   └── run_plumber.R
+#> ├── dev
+#> │   └── run_dev.R
+#> ├── inst
+#> │   └── pipework.yml
+#> ├── man
+#> │   └── run_api.Rd
+#> └── tests
+#>     ├── testthat
+#>     │   ├── test-health.R
+#>     │   └── test-run_plumber.R
+#>     └── testthat.R
+```
+
+    #> handles:
+    #>    health:
+    #>      methods: GET
+    #>      path: /health
+    #>      handler: health

@@ -13,7 +13,15 @@ cli::cat_rule("[Rprofile] Sourcing project-wide rprofile")
   usethis::use_test(name)
 }
 
+.check_n_covr <- function() {
+  res <- devtools::check(args = c("--no-tests"))
+  print(res)
+  covr::package_coverage(type = "tests", quiet = TRUE)
+}
+
 ### Linter ---------------------------------------------------------------------
+
+options(styler.cache_root = "styler-perm")
 
 if (!rlang::is_installed("grkstyle")) {
   cli::cli_alert_danger("{grkstyle} styler not found!")
