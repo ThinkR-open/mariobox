@@ -116,6 +116,8 @@ add_get(
 fs::dir_tree(path_pipo)
 ```
 
+The YALML is automatically updated:
+
 ```{r, echo=FALSE}
 cat_mariobox_yaml(path_pipo)
 ```
@@ -132,6 +134,8 @@ remove_endpoint(
 ```{r}
 fs::dir_tree(path_pipo)
 ```
+
+The YALML is automatically updated:
 
 ```{r, echo=FALSE}
 cat_mariobox_yaml(path_pipo)
@@ -162,10 +166,9 @@ That way, you can handle the data manipulation function just like a plain standa
 
 ## Running the API
 
-In dev, you can launch the file at dev/run_dev.R. Note that `golem::run_dev()` will also launch this file: 
-
+In dev, you can launch the file at dev/run_dev.R. 
 ```{r eval = FALSE}
-golem::run_dev()
+source("dev/run_dev.R", echo = TRUE)
 ```
 
 In production, the `run_api()` is in charge of running the API. 
@@ -176,7 +179,9 @@ If you want to deloy to RStudio Connect, the `build_plumber_file()` function wil
 build_plumber_file(pkg = path_pipo)
 ```
 
-```{r}
+This will produce the following file:
+
+```{r echo = FALSE}
 readLines(
   file.path(
     path_pipo,

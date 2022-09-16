@@ -43,42 +43,42 @@ create_mariobox(
   path = path_pipo,
   open = FALSE
 )
-#> ── Creating dir ────────────────────────────────────────────────────────────────
-#> ✔ Creating '/var/folders/5z/rm2h62lj45d332kfpj28c8zm0000gn/T/Rtmpm2dkp4/pipo9ab06dce5435/'
-#> ✔ Setting active project to '/private/var/folders/5z/rm2h62lj45d332kfpj28c8zm0000gn/T/Rtmpm2dkp4/pipo9ab06dce5435'
-#> ✔ Creating 'R/'
-#> ✔ Writing a sentinel file '.here'
-#> • Build robust paths within your project via `here::here()`
-#> • Learn more at <https://here.r-lib.org>
-#> ✔ Setting active project to '<no active project>'
-#> ✔ Created package directory
-#> ── Copying package skeleton ────────────────────────────────────────────────────
-#> ✔ Copied app skeleton
-#> ── Done ────────────────────────────────────────────────────────────────────────
-#> A new mariobox named pipo9ab06dce5435 was created at /private/var/folders/5z/rm2h62lj45d332kfpj28c8zm0000gn/T/Rtmpm2dkp4/pipo9ab06dce5435 .
+  ── Creating dir ────────────────────────────────────────────────────────────────
+  ✔ Creating '/var/folders/5z/rm2h62lj45d332kfpj28c8zm0000gn/T/RtmpP86EN6/pipoac8920906d46/'
+  ✔ Setting active project to '/private/var/folders/5z/rm2h62lj45d332kfpj28c8zm0000gn/T/RtmpP86EN6/pipoac8920906d46'
+  ✔ Creating 'R/'
+  ✔ Writing a sentinel file '.here'
+  • Build robust paths within your project via `here::here()`
+  • Learn more at <https://here.r-lib.org>
+  ✔ Setting active project to '<no active project>'
+  ✔ Created package directory
+  ── Copying package skeleton ────────────────────────────────────────────────────
+  ✔ Copied app skeleton
+  ── Done ────────────────────────────────────────────────────────────────────────
+  A new mariobox named pipoac8920906d46 was created at /private/var/folders/5z/rm2h62lj45d332kfpj28c8zm0000gn/T/RtmpP86EN6/pipoac8920906d46 .
 ```
 
 By default, you’ll find the following structure:
 
 ``` r
 fs::dir_tree(path_pipo)
-#> /var/folders/5z/rm2h62lj45d332kfpj28c8zm0000gn/T//Rtmpm2dkp4/pipo9ab06dce5435
-#> ├── DESCRIPTION
-#> ├── NAMESPACE
-#> ├── R
-#> │   ├── get_health.R
-#> │   └── run_plumber.R
-#> ├── dev
-#> │   └── run_dev.R
-#> ├── inst
-#> │   └── mariobox.yml
-#> ├── man
-#> │   └── run_api.Rd
-#> └── tests
-#>     ├── testthat
-#>     │   ├── test-health.R
-#>     │   └── test-run_plumber.R
-#>     └── testthat.R
+  /var/folders/5z/rm2h62lj45d332kfpj28c8zm0000gn/T//RtmpP86EN6/pipoac8920906d46
+  ├── DESCRIPTION
+  ├── NAMESPACE
+  ├── R
+  │   ├── get_health.R
+  │   └── run_plumber.R
+  ├── dev
+  │   └── run_dev.R
+  ├── inst
+  │   └── mariobox.yml
+  ├── man
+  │   └── run_api.Rd
+  └── tests
+      ├── testthat
+      │   ├── test-health.R
+      │   └── test-run_plumber.R
+      └── testthat.R
 ```
 
 The default API comes with one default endpoint, `/health`, which
@@ -89,13 +89,13 @@ can be as close as possible to a package structure. `{mariobox}` will
 then do a little bit of its magic and parse this YAML to build the
 `{plumber}` API.
 
-    #> metadata:
-    #>    title: mariobox API
-    #>  handles:
-    #>    health_get:
-    #>      methods: GET
-    #>      path: /health
-    #>      handler: health
+      metadata:
+         title: mariobox API
+       handles:
+         health_get:
+           methods: GET
+           path: /health
+           handler: health
 
 ### Add/Remove endpoints
 
@@ -110,32 +110,32 @@ add_endpoint(
   open = FALSE,
   pkg = path_pipo
 )
-#> ✔ Endpoint added
+  ✔ Endpoint added
 ```
 
 This will produce the following R file:
 
-    #> #' GET allo
-    #> #' 
-    #> #' @param req,res HTTP objects
-    #> #' 
-    #> #' @export
-    #> #'  
-    #> get_allo <- function(req, res){
-    #>     mariobox::mario_log(
-    #>         method = "GET",
-    #>         name = "allo"
-    #>     )
-    #>     get_allo_f()
-    #> }
-    #>  
-    #> #' GET allo internal
-    #> #' 
-    #> #' @noRd
-    #> #'  
-    #> get_allo_f <- function(){
-    #>     return('ok')
-    #> }
+      #' GET allo
+      #' 
+      #' @param req,res HTTP objects
+      #' 
+      #' @export
+      #'  
+      get_allo <- function(req, res){
+          mariobox::mario_log(
+              method = "GET",
+              name = "allo"
+          )
+          get_allo_f()
+      }
+       
+      #' GET allo internal
+      #' 
+      #' @noRd
+      #'  
+      get_allo_f <- function(){
+          return('ok')
+      }
 
 ``` r
 add_get(
@@ -143,49 +143,51 @@ add_get(
   open = FALSE,
   pkg = path_pipo
 )
-#> ✔ Endpoint added
+  ✔ Endpoint added
 ```
 
 ``` r
 fs::dir_tree(path_pipo)
-#> /var/folders/5z/rm2h62lj45d332kfpj28c8zm0000gn/T//Rtmpm2dkp4/pipo9ab06dce5435
-#> ├── DESCRIPTION
-#> ├── NAMESPACE
-#> ├── R
-#> │   ├── get_allo.R
-#> │   ├── get_health.R
-#> │   ├── get_hey.R
-#> │   └── run_plumber.R
-#> ├── dev
-#> │   └── run_dev.R
-#> ├── inst
-#> │   └── mariobox.yml
-#> ├── man
-#> │   └── run_api.Rd
-#> └── tests
-#>     ├── testthat
-#>     │   ├── test-get_allo.R
-#>     │   ├── test-get_hey.R
-#>     │   ├── test-health.R
-#>     │   └── test-run_plumber.R
-#>     └── testthat.R
+  /var/folders/5z/rm2h62lj45d332kfpj28c8zm0000gn/T//RtmpP86EN6/pipoac8920906d46
+  ├── DESCRIPTION
+  ├── NAMESPACE
+  ├── R
+  │   ├── get_allo.R
+  │   ├── get_health.R
+  │   ├── get_hey.R
+  │   └── run_plumber.R
+  ├── dev
+  │   └── run_dev.R
+  ├── inst
+  │   └── mariobox.yml
+  ├── man
+  │   └── run_api.Rd
+  └── tests
+      ├── testthat
+      │   ├── test-get_allo.R
+      │   ├── test-get_hey.R
+      │   ├── test-health.R
+      │   └── test-run_plumber.R
+      └── testthat.R
 ```
 
-    #> metadata:
-    #>    title: mariobox API
-    #>  handles:
-    #>    health_get:
-    #>      methods: GET
-    #>      path: /health
-    #>      handler: health
-    #>    allo_get:
-    #>      methods: GET
-    #>      path: /allo
-    #>      handler: allo
-    #>    hey_get:
-    #>      methods: GET
-    #>      path: /hey
-    #>      handler: hey
+The YALML is automatically updated:
+
+      metadata:
+         title: mariobox API
+       handles:
+         health_get:
+           methods: GET
+           path: /health
+           handler: health
+         allo_get:
+           methods: GET
+           path: /allo
+           handler: get_allo
+         hey_get:
+           methods: GET
+           path: /hey
+           handler: get_hey
 
 ``` r
 remove_endpoint(
@@ -193,44 +195,46 @@ remove_endpoint(
   method = "GET",
   pkg = path_pipo
 )
-#> ✔ Endpoint removed
+  ✔ Endpoint removed
 ```
 
 ``` r
 fs::dir_tree(path_pipo)
-#> /var/folders/5z/rm2h62lj45d332kfpj28c8zm0000gn/T//Rtmpm2dkp4/pipo9ab06dce5435
-#> ├── DESCRIPTION
-#> ├── NAMESPACE
-#> ├── R
-#> │   ├── get_health.R
-#> │   ├── get_hey.R
-#> │   └── run_plumber.R
-#> ├── dev
-#> │   └── run_dev.R
-#> ├── inst
-#> │   └── mariobox.yml
-#> ├── man
-#> │   └── run_api.Rd
-#> └── tests
-#>     ├── testthat
-#>     │   ├── test-get_allo.R
-#>     │   ├── test-get_hey.R
-#>     │   ├── test-health.R
-#>     │   └── test-run_plumber.R
-#>     └── testthat.R
+  /var/folders/5z/rm2h62lj45d332kfpj28c8zm0000gn/T//RtmpP86EN6/pipoac8920906d46
+  ├── DESCRIPTION
+  ├── NAMESPACE
+  ├── R
+  │   ├── get_health.R
+  │   ├── get_hey.R
+  │   └── run_plumber.R
+  ├── dev
+  │   └── run_dev.R
+  ├── inst
+  │   └── mariobox.yml
+  ├── man
+  │   └── run_api.Rd
+  └── tests
+      ├── testthat
+      │   ├── test-get_allo.R
+      │   ├── test-get_hey.R
+      │   ├── test-health.R
+      │   └── test-run_plumber.R
+      └── testthat.R
 ```
 
-    #> metadata:
-    #>    title: mariobox API
-    #>  handles:
-    #>    health_get:
-    #>      methods: GET
-    #>      path: /health
-    #>      handler: health
-    #>    hey_get:
-    #>      methods: GET
-    #>      path: /hey
-    #>      handler: hey
+The YALML is automatically updated:
+
+      metadata:
+         title: mariobox API
+       handles:
+         health_get:
+           methods: GET
+           path: /health
+           handler: health
+         hey_get:
+           methods: GET
+           path: /hey
+           handler: get_hey
 
 ### About endpoint functions
 
@@ -261,11 +265,10 @@ care about the HTTP part.
 
 ## Running the API
 
-In dev, you can launch the file at dev/run_dev.R. Note that
-`golem::run_dev()` will also launch this file:
+In dev, you can launch the file at dev/run_dev.R.
 
 ``` r
-golem::run_dev()
+source("dev/run_dev.R", echo = TRUE)
 ```
 
 In production, the `run_api()` is in charge of running the API.
@@ -276,27 +279,21 @@ can deploy using this file.
 
 ``` r
 build_plumber_file(pkg = path_pipo)
-#> ℹ Loading pipo9ab06dce5435
-#> ✔ plumber.R file created
+  ℹ Loading pipoac8920906d46
+  ✔ plumber.R file created
 ```
 
-``` r
-readLines(
-  file.path(
-    path_pipo,
-    "plumber.R"
-  )
-) |> cat(sep = "\n")
-#> library(plumber)
-#>  
-#> #* @apiTitle mariobox API
-#>  
-#> pkgload::load_all()
-#>  
-#>  
-#> #* @get /health
-#> health
-#>  
-#> #* @get /hey
-#> hey
-```
+This will produce the following file:
+
+      library(plumber)
+       
+      #* @apiTitle mariobox API
+       
+      pkgload::load_all()
+       
+       
+      #* @get /health
+      health
+       
+      #* @get /hey
+      get_hey
