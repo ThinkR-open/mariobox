@@ -63,11 +63,17 @@ add_endpoint <- function(
     eval.expr = FALSE
   )
 
+  fct_name <- sprintf(
+    "%s_%s",
+    tolower(method),
+    name
+  )
+
   if (is.null(yml$handles[[name_yaml]])) {
     yml$handles[[name_yaml]] <- list(
       methods = method,
       path = sprintf("/%s", name),
-      handler = name
+      handler = fct_name
     )
   } else {
     cli_alert_danger(
@@ -84,11 +90,7 @@ add_endpoint <- function(
     mariobox_yaml_path
   )
 
-  fct_name <- sprintf(
-    "%s_%s",
-    tolower(method),
-    name
-  )
+
   usethis_use_r(
     name = fct_name,
     open = open,
