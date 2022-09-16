@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/reference/test_package.html#special-files
 
 library(testthat)
-library(pipeworkexample)
+library(marioboxexample)
 
-test_check("pipeworkexample")
+test_check("marioboxexample")

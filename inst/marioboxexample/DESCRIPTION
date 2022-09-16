@@ -1,4 +1,4 @@
-Package: pipeworkexample
+Package: marioboxexample
 Title: A cunning plumber API
 Version: 0.0.0.9000
 Authors@R: 
@@ -9,6 +9,7 @@ Authors@R:
 Description: What the package does (one paragraph).
 License: What license is it under?
 Imports: 
+    mariobox,
     plumber,
     yaml
 Suggests: 

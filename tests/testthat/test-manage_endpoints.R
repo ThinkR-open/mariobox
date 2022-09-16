@@ -2,16 +2,16 @@ test_that("Managing endpoints", {
   path_dummy <- tempfile(pattern = "dummy")
   dir.create(path_dummy)
 
-  dummy_pipework_path <- file.path(path_dummy, "pipo")
-  path_pkg <- create_pipework(
-    path = dummy_pipework_path,
+  dummy_mariobox_path <- file.path(path_dummy, "pipo")
+  path_pkg <- create_mariobox(
+    path = dummy_mariobox_path,
     open = FALSE
   )
 
-  withr::with_dir(dummy_pipework_path, {
+  withr::with_dir(dummy_mariobox_path, {
 
     # Adding endpoint
-    pipework_yaml_path <- "inst/pipework.yml"
+    mariobox_yaml_path <- "inst/mariobox.yml"
     endpoint_name <- "michel"
     r_file <- sprintf("R/fct_%s.R", endpoint_name)
     test_file <- sprintf("tests/testthat/test-fct_%s.R", endpoint_name)
@@ -32,7 +32,7 @@ test_that("Managing endpoints", {
       handler = endpoint_name
     )
 
-    pw_add_endpoint(
+    add_endpoint(
       name = endpoint_name,
       open = FALSE
     )
@@ -48,13 +48,13 @@ test_that("Managing endpoints", {
       "test_that(\"multiplication works\", {  expect_equal(2 * 2, 4)})"
     )
     expect_equal(
-      yaml::read_yaml(pipework_yaml_path),
+      yaml::read_yaml(mariobox_yaml_path),
       expected_yaml
     )
 
     # Idempotence: Adding endpoint
     expect_message(
-      pw_add_endpoint(
+      add_endpoint(
         name = endpoint_name,
         open = FALSE
       ),
@@ -71,24 +71,24 @@ test_that("Managing endpoints", {
       "test_that(\"multiplication works\", {  expect_equal(2 * 2, 4)})"
     )
     expect_equal(
-      yaml::read_yaml(pipework_yaml_path),
+      yaml::read_yaml(mariobox_yaml_path),
       expected_yaml
     )
 
     # Remove endpoint
-    pw_remove_endpoint(
+    remove_endpoint(
       name = endpoint_name
     )
     expect_false(file.exists(r_file))
     expect_false(file.exists(test_file))
     expect_equal(
-      yaml::read_yaml(pipework_yaml_path),
+      yaml::read_yaml(mariobox_yaml_path),
       default_yaml
     )
 
     # Idempotence: Remove endpoint
     expect_message(
-      pw_remove_endpoint(
+      remove_endpoint(
         name = endpoint_name
       ),
       regexp = sprintf("There is no endpoint '%s' to delete", endpoint_name)
@@ -96,7 +96,7 @@ test_that("Managing endpoints", {
     expect_false(file.exists(r_file))
     expect_false(file.exists(test_file))
     expect_equal(
-      yaml::read_yaml(pipework_yaml_path),
+      yaml::read_yaml(mariobox_yaml_path),
       default_yaml
     )
   })

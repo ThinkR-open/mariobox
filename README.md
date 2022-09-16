@@ -1,40 +1,40 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# {pipework}
+# {mariobox}
 
 <!-- badges: start -->
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
-status](https://www.r-pkg.org/badges/version/pipework)](https://CRAN.R-project.org/package=pipework)
+status](https://www.r-pkg.org/badges/version/mariobox)](https://CRAN.R-project.org/package=mariobox)
 <!-- badges: end -->
 
-The goal of pipework is to provide a framework for packaging {plumber}
+The goal of mariobox is to provide a framework for packaging {plumber}
 APIs, the same way {golem} is a framework for packaging {shiny} apps.
 
 ## Installation
 
-You can install the development version of pipework from
+You can install the development version of mariobox from
 [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("ThinkR-Open/pipework")
+remotes::install_github("ThinkR-Open/mariobox")
 ```
 
 ## Example
 
 ``` r
-library(pipework)
+library(mariobox)
 ```
 
-### Creating a new pipework project:
+### Creating a new mariobox project:
 
 ``` r
 path_pipo <- tempfile(pattern = "pipo")
-create_pipework(
+create_mariobox(
   path = path_pipo,
   open = FALSE
 )
@@ -50,7 +50,7 @@ create_pipework(
 #> ── Copying package skeleton ────────────────────────────────────────────────────
 #> ✔ Copied app skeleton
 #> ── Done ────────────────────────────────────────────────────────────────────────
-#> A new pipework named pipofc3e355c5196 was created at /tmp/RtmpaExIU6/pipofc3e355c5196 .
+#> A new mariobox named pipofc3e355c5196 was created at /tmp/RtmpaExIU6/pipofc3e355c5196 .
 ```
 
 ``` r
@@ -64,7 +64,7 @@ fs::dir_tree(path_pipo)
 #> ├── dev
 #> │   └── run_dev.R
 #> ├── inst
-#> │   └── pipework.yml
+#> │   └── mariobox.yml
 #> ├── man
 #> │   └── run_api.Rd
 #> └── tests
@@ -83,13 +83,13 @@ fs::dir_tree(path_pipo)
 ### Add/Remove endpoints
 
 ``` r
-pw_add_endpoint(
+add_endpoint(
   name = "allo",
   methods  = "GET",
   open = FALSE,
   pkg = path_pipo
 )
-#> ✔ Setting active project to '/home/bob/projects/pipework'
+#> ✔ Setting active project to '/home/bob/projects/mariobox'
 #> • Edit 'R/fct_allo.R'
 #> • Call `use_test()` to create a matching test file
 #> ✔ Writing 'tests/testthat/test-fct_allo.R'
@@ -108,7 +108,7 @@ fs::dir_tree(path_pipo)
 #> ├── dev
 #> │   └── run_dev.R
 #> ├── inst
-#> │   └── pipework.yml
+#> │   └── mariobox.yml
 #> ├── man
 #> │   └── run_api.Rd
 #> └── tests
@@ -129,7 +129,7 @@ fs::dir_tree(path_pipo)
     #>      handler: allo
 
 ``` r
-pw_remove_endpoint(
+remove_endpoint(
   name = "allo",
   pkg = path_pipo
 )
@@ -146,7 +146,7 @@ fs::dir_tree(path_pipo)
 #> ├── dev
 #> │   └── run_dev.R
 #> ├── inst
-#> │   └── pipework.yml
+#> │   └── mariobox.yml
 #> ├── man
 #> │   └── run_api.Rd
 #> └── tests

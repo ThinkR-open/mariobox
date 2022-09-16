@@ -1,5 +1,5 @@
 
-#' Create a {pipework} project to package a {plumber} API
+#' Create a {mariobox} project to package a {plumber} API
 #'
 #' This function will create a prepopulated package
 #' with all the necessary elements to publish a {plumber} API as a package.
@@ -8,7 +8,7 @@
 #' the package in. The folder name will also be used as the package name.
 #' @param open A logical. Should the new project be open?
 #' @param overwrite A logical. Should the already existing project be overwritten ?
-#' @param package_name Package name to use. By default, {pipework} uses
+#' @param package_name Package name to use. By default, {mariobox} uses
 #' `basename(path)`. If `path == '.'` & `package_name` is not explicitly set,
 #' then `basename(getwd())` will be used.
 #'
@@ -24,12 +24,12 @@
 #'
 #' @examples
 #' path_pipo <- tempfile(pattern = "pipo")
-#' create_pipework(
+#' create_mariobox(
 #'   path = path_pipo,
 #'   open = FALSE
 #' )
 #'
-create_pipework <- function(
+create_mariobox <- function(
   path,
   # check_name = TRUE,
   open = TRUE,
@@ -48,8 +48,8 @@ create_pipework <- function(
       stop(
         paste(
           "Project directory already exists. \n",
-          "Set `create_pipework(overwrite = TRUE)` to overwrite anyway.\n",
-          "Be careful this will restore a brand new pipework project. \n",
+          "Set `create_mariobox(overwrite = TRUE)` to overwrite anyway.\n",
+          "Be careful this will restore a brand new mariobox project. \n",
           "You might be at risk of losing your work !"
         ),
         call. = FALSE
@@ -67,15 +67,15 @@ create_pipework <- function(
   }
 
   cat_rule("Copying package skeleton")
-  pipeworkexample_path <- pipework_sys("pipeworkexample")
+  marioboxexample_path <- mariobox_sys("marioboxexample")
   dir_copy(
-    path = pipeworkexample_path,
+    path = marioboxexample_path,
     new_path = path,
     overwrite = TRUE
   )
   # Listing copied files ***from source directory***
   copied_files <- list.files(
-    path = pipeworkexample_path,
+    path = marioboxexample_path,
     full.names = FALSE,
     all.files = TRUE,
     recursive = TRUE
@@ -92,7 +92,7 @@ create_pipework <- function(
     }
     replace_word(
       file = copied_file,
-      pattern = "pipeworkexample",
+      pattern = "marioboxexample",
       replace = package_name
     )
   }
@@ -101,7 +101,7 @@ create_pipework <- function(
   cat_rule("Done")
   cat_line(
     paste0(
-      "A new pipework named ",
+      "A new mariobox named ",
       package_name,
       " was created at ",
       normalizePath(path),

@@ -1,4 +1,4 @@
-Package: pipework
+Package: mariobox
 Title: A Framework For Packaging {plumber} APIs
 Version: 0.0.0.9000
 Authors@R: c(
@@ -12,6 +12,7 @@ Imports:
     cli,
     fs,
     here,
+    rlang,
     rstudioapi,
     usethis,
     utils,

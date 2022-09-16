@@ -1,10 +1,10 @@
 
 #' Manage endpoints
 #'
-#' Add or remove endpoints in a pipework project.
+#' Add or remove endpoints in a mariobox project.
 #'
 #' @param name A character string. The name of the endpoint.
-#' @param methods A character string. The name of the rest methods.
+#' @param method A character string. The name of the rest method.
 #' @param open A logical. Should the project be exported or not?
 #' @param pkg A character string. The path to package root.
 #'
@@ -22,58 +22,74 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Create a new pipework project
+#' # Create a new mariobox project
 #' path_pipo <- tempfile(pattern = "pipo")
-#' create_pipework(
+#' create_mariobox(
 #'   path = path_pipo,
 #'   open = FALSE
 #' )
 #' # Add an endpoint
-#' pw_add_endpoint(
+#' add_endpoint(
 #'   name = "allo",
-#'   methods = "GET",
+#'   method = "GET",
 #'   open = FALSE,
 #'   pkg = path_pipo
 #' )
 #' # Remove endpoint
-#' pw_remove_endpoint(
+#' remove_endpoint(
 #'   name = "allo",
 #'   pkg = path_pipo
 #' )
 #' }
-pw_add_endpoint <- function(
+add_endpoint <- function(
   name,
-  methods = "GET",
+  method = "GET",
   open = TRUE,
   pkg = "."
 ) {
-  pipework_yaml_path <- file.path(pkg, "inst/pipework.yml")
+  name_yaml <- sprintf(
+    "%s_%s",
+    name,
+    tolower(method)
+  )
+
+  mariobox_yaml_path <- file.path(
+    pkg,
+    "inst/mariobox.yml"
+  )
 
   yml <- yaml::read_yaml(
-    pipework_yaml_path,
+    mariobox_yaml_path,
     eval.expr = FALSE
   )
 
-  if (is.null(yml$handles[[name]])) {
-    yml$handles[[name]] <- list(
-      methods = methods,
+  if (is.null(yml$handles[[name_yaml]])) {
+    yml$handles[[name_yaml]] <- list(
+      methods = method,
       path = sprintf("/%s", name),
       handler = name
     )
   } else {
     cli_alert_danger(
-      sprintf("Endpoint '%s' already created", name)
+      sprintf(
+        "Endpoint '%s' already exists",
+        name
+      )
     )
     return(NULL)
   }
 
   yaml::write_yaml(
     yml,
-    pipework_yaml_path
+    mariobox_yaml_path
   )
 
-  fct_name <- sprintf("fct_%s", name)
-  usethis::use_r(
+  fct_name <- sprintf(
+    "%s_%s",
+    tolower(method),
+    name
+  )
+  usethis_use_r(
     name = fct_name,
     open = open
   )
@@ -89,14 +105,69 @@ pw_add_endpoint <- function(
   }
   write_there(
     sprintf(
-      "%s <- function(req){",
+      "#' %s %s",
+      method,
       name
     )
   )
-  write_there("    return(\"ok\")")
+  write_there("#' ")
+  write_there("#' @param req,res HTTP objects")
+  write_there("#' ")
+  write_there("#' @export")
+  write_there("#'  ")
+  write_there(
+    sprintf(
+      "%s_%s <- function(",
+      tolower(method),
+      name
+    )
+  )
+  write_there(
+    "    mariobox::mario_log("
+  )
+  write_there(
+    sprintf(
+      "        method = \"%s\",",
+      method
+    )
+  )
+  write_there(
+    sprintf(
+      "        name = \"%s\"",
+      name
+    )
+  )
+  write_there("    )")
+  write_there(
+    sprintf(
+      "    %s_%s_f()",
+      tolower(method),
+      name
+    )
+  )
+  write_there("}")
+  write_there(" ")
+  write_there(
+    sprintf(
+      "#' %s %s internal",
+      method,
+      name
+    )
+  )
+  write_there("#' ")
+  write_there("#' @noRd")
+  write_there("#'  ")
+  write_there(
+    sprintf(
+      "%s_%s_f <- function()",
+      tolower(method),
+      name
+    )
+  )
+  write_there("    return('ok')")
   write_there("}")
 
-  usethis::use_test(
+  usethis_use_test(
     name = fct_name,
     open = open
   )
@@ -104,29 +175,118 @@ pw_add_endpoint <- function(
 
 #' @name manage_endpoints
 #' @export
-pw_remove_endpoint <- function(
+add_delete <- function(
   name,
+  open = TRUE,
   pkg = "."
 ) {
-  pipework_yaml_path <- file.path(pkg, "inst/pipework.yml")
+  add_endpoint(
+    name = name,
+    method = "DELETE",
+    open = open,
+    pkg = pkg
+  )
+}
+
+#' @name manage_endpoints
+#' @export
+add_get <- function(
+  name,
+  open = TRUE,
+  pkg = "."
+) {
+  add_endpoint(
+    name = name,
+    method = "GET",
+    open = open,
+    pkg = pkg
+  )
+}
+
+#' @name manage_endpoints
+#' @export
+add_patch <- function(
+  name,
+  open = TRUE,
+  pkg = "."
+) {
+  add_endpoint(
+    name = name,
+    method = "PATCH",
+    open = open,
+    pkg = pkg
+  )
+}
+
+#' @name manage_endpoints
+#' @export
+add_post <- function(
+  name,
+  open = TRUE,
+  pkg = "."
+) {
+  add_endpoint(
+    name = name,
+    method = "POST",
+    open = open,
+    pkg = pkg
+  )
+}
+
+#' @name manage_endpoints
+#' @export
+add_put <- function(
+  name,
+  open = TRUE,
+  pkg = "."
+) {
+  add_endpoint(
+    name = name,
+    method = "PUT",
+    open = open,
+    pkg = pkg
+  )
+}
+
+#' @name manage_endpoints
+#' @export
+remove_endpoint <- function(
+  name,
+  method,
+  pkg = "."
+) {
+  name_yaml <- sprintf(
+    "%s_%s",
+    name,
+    tolower(method)
+  )
+
+  mariobox_yaml_path <- file.path(
+    pkg,
+    "inst/mariobox.yml"
+  )
 
   yml <- yaml::read_yaml(
-    pipework_yaml_path,
+    mariobox_yaml_path,
     eval.expr = FALSE
   )
 
-  if (is.null(yml$handles[[name]])) {
+  if (is.null(yml$handles[[name_yaml]])) {
     cli_alert_danger(
-      sprintf("There is no endpoint '%s' to delete", name)
+      sprintf(
+        "There is no endpoint '%s' with method '%s' to delete",
+        name,
+        method
+      )
     )
     return(NULL)
   }
 
-  yml$handles[[name]] <- NULL
+  yml$handles[[name_yaml]] <- NULL
 
   yaml::write_yaml(
     yml,
-    pipework_yaml_path
+    mariobox_yaml_path
   )
 
   fct_name <- sprintf("fct_%s", name)
@@ -142,6 +302,13 @@ pw_remove_endpoint <- function(
     force = TRUE
   )
   unlink(
-    file.path("tests", "testthat", sprintf("test-%s.R", fct_name))
+    file.path(
+      "tests",
+      "testthat",
+      sprintf(
+        "test-%s.R",
+        fct_name
+      )
+    )
   )
 }
