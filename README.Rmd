@@ -7,7 +7,7 @@ output: github_document
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
+  comment = " ",
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
@@ -30,6 +30,8 @@ cat_mariobox_yaml <- function(path_pipo) {
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/mariobox)](https://CRAN.R-project.org/package=mariobox)
 <!-- badges: end -->
+
+[DISCLAIMER] This is a Work In Progress, please use at your own risk. 
 
 The goal of `{mariobox}` is to provide a framework for packaging {plumber} APIs.
 Think of it as the "`{golem}` for `{plumber}`"
@@ -85,10 +87,21 @@ The generic one is `add_endpoint`, that allows you to pass any HTTP verb, and ad
 ```{r}
 add_endpoint(
   name = "allo",
-  methods = "GET",
+  method = "GET",
   open = FALSE,
   pkg = path_pipo
 )
+```
+
+This will produce the following R file: 
+
+```{r echo = FALSE}
+readLines(
+  file.path(
+    path_pipo,
+    "R/get_allo.R"
+  )
+) |> cat(sep = "\n")
 ```
 
 ```{r}
@@ -108,8 +121,9 @@ cat_mariobox_yaml(path_pipo)
 ```
 
 ```{r}
-pw_remove_endpoint(
+remove_endpoint(
   name = "allo",
+  method = "GET",
   pkg = path_pipo
 )
 ```
@@ -157,3 +171,16 @@ golem::run_dev()
 In production, the `run_api()` is in charge of running the API. 
 
 If you want to deloy to RStudio Connect, the `build_plumber_file()` function will create a `plumber.R` file at the root of your folder. You can deploy using this file.
+
+```{r}
+build_plumber_file(pkg = path_pipo)
+```
+
+```{r}
+readLines(
+  file.path(
+    path_pipo,
+    "plumber.R"
+  )
+) |> cat(sep = "\n")
+```
