@@ -4,12 +4,14 @@
 #'
 #' @export
 build_plumber_file <- function(pkg = ".") {
-  pkgload::load_all()
-
-  unlink("plumber.R")
+  pkgload_load_all(path = pkg)
+  plum_file <- file.path(
+    pkg,
+    "plumber.R"
+  )
 
   write_there <- function(x) {
-    write(x, "plumber.R", append = TRUE)
+    write(x, plum_file, append = TRUE)
   }
 
   mariobox_yaml_path <- file.path(
@@ -46,4 +48,5 @@ build_plumber_file <- function(pkg = ".") {
     )
     write_there(handle$handler)
   }
+  cat_green_tick("plumber.R file created")
 }
