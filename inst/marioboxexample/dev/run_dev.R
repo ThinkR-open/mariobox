@@ -2,11 +2,11 @@
 # Comment this if you don't want the app to be served on a random port
 options(plumber.port = httpuv::randomPort())
 
-# Detach all loaded packages and clean your environment
-golem::detach_all_attached()
+rlang::check_installed("devtools", "to load the dev")
+rlang::check_installed("pkgload", "to load the dev")
 
-# Document and reload your package
-golem::document_and_reload()
+devtools::document()
+pkgload::load_all()
 
 # Run the application
 run_api()
