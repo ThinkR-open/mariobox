@@ -91,7 +91,8 @@ add_endpoint <- function(
   )
   usethis_use_r(
     name = fct_name,
-    open = open
+    open = open,
+    pkg = pkg
   )
 
   f_path <- file.path(
@@ -117,7 +118,7 @@ add_endpoint <- function(
   write_there("#'  ")
   write_there(
     sprintf(
-      "%s_%s <- function(",
+      "%s_%s <- function(req, res){",
       tolower(method),
       name
     )
@@ -159,7 +160,7 @@ add_endpoint <- function(
   write_there("#'  ")
   write_there(
     sprintf(
-      "%s_%s_f <- function()",
+      "%s_%s_f <- function(){",
       tolower(method),
       name
     )
@@ -169,8 +170,11 @@ add_endpoint <- function(
 
   usethis_use_test(
     name = fct_name,
-    open = open
+    open = open,
+    pkg = pkg
   )
+
+  cat_green_tick("Endpoint added")
 }
 
 #' @name manage_endpoints
@@ -289,7 +293,12 @@ remove_endpoint <- function(
     mariobox_yaml_path
   )
 
-  fct_name <- sprintf("fct_%s", name)
+  fct_name <- sprintf(
+    "%s_%s",
+    tolower(method),
+    name
+  )
+
   f_path <- file.path(
     pkg,
     "R",
@@ -311,4 +320,5 @@ remove_endpoint <- function(
       )
     )
   )
+  cat_green_tick("Endpoint removed")
 }
