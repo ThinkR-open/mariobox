@@ -15,14 +15,14 @@ silent_lapply <- function(.x, .f, ...) {
   )
 }
 
-pipework_sys <- function(
+mariobox_sys <- function(
   ...,
   lib.loc = NULL,
   mustWork = FALSE
 ) {
   system.file(
     ...,
-    package = "pipework",
+    package = "mariobox",
     lib.loc = lib.loc,
     mustWork = mustWork
   )

@@ -1,5 +1,5 @@
 
-is_properly_populated_pipework <- function(path) {
+is_properly_populated_mariobox <- function(path) {
 
   # All files excepts *.Rproj which changes based on the project name
   expected_files <- c(
@@ -7,7 +7,7 @@ is_properly_populated_pipework <- function(path) {
     "LICENSE",
     "LICENSE.md",
     "dev/run_dev.R",
-    "inst/pipework.yml",
+    "inst/mariobox.yml",
     "man/run_api.Rd",
     "NAMESPACE",
     "R/fct_health.R",
@@ -41,18 +41,18 @@ keep_only_non_pdf_related_warnings <- function(check_output_warnings) {
 
 path_dummy <- tempfile(pattern = "dummy")
 dir.create(path_dummy)
-dummy_pipework_path <- file.path(path_dummy, "pipo")
-path_pkg <- create_pipework(
-  path = dummy_pipework_path,
+dummy_mariobox_path <- file.path(path_dummy, "pipo")
+path_pkg <- create_mariobox(
+  path = dummy_mariobox_path,
   open = FALSE
 )
 
-usethis::with_project(dummy_pipework_path, {
-  test_that("create_pipework() works", {
+usethis::with_project(dummy_mariobox_path, {
+  test_that("create_mariobox() works", {
     usethis::use_mit_license(copyright_holder = "Babar")
 
     check_output <- rcmdcheck::rcmdcheck(
-      # path = dummy_pipework_path,
+      # path = dummy_mariobox_path,
       quiet = TRUE,
       args = c("--no-manual")
     )
@@ -80,7 +80,7 @@ usethis::with_project(dummy_pipework_path, {
       )
     }
     expect_true(
-      is_properly_populated_pipework(path_pkg)
+      is_properly_populated_mariobox(path_pkg)
     )
   })
 })
