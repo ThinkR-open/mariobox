@@ -7,7 +7,7 @@
 #'
 #' @export
 #'
-#' @example
+#' @examples
 #' mario_log("GET", "health")
 mario_log <- function(
   method,

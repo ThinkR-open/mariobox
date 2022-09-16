@@ -14,3 +14,6 @@ mario_log(method, name)
 \description{
 Log Sys.time() and endpoint name
 }
+\examples{
+mario_log("GET", "health")
+}
