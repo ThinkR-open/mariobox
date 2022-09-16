@@ -4,4 +4,4 @@ handles:
   health_get:
     methods: GET
     path: /health
-    handler: health
+    handler: get_health
