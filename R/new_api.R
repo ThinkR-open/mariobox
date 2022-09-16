@@ -1,6 +1,9 @@
+#' Launch the API
+#' 
+#' @param yaml_file path to the yaml
 #' @importFrom plumber Plumber
 #' @importFrom yaml read_yaml
-#' @noRd
+#' @export
 new_api <- function(yaml_file) {
   api <- Plumber$new()
   api_definition <- read_yaml(
