@@ -12,6 +12,7 @@ Imports:
     cli,
     fs,
     here,
+    plumber,
     rlang,
     rstudioapi,
     usethis,
@@ -19,8 +20,8 @@ Imports:
     yaml
 Suggests: 
     httr,
-    plumber,
     rcmdcheck,
+    pkgload,
     testthat (>= 3.0.0),
     withr
 Config/testthat/edition: 3
