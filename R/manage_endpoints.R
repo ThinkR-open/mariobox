@@ -143,7 +143,7 @@ add_endpoint <- function(
   write_there("    )")
   write_there(
     sprintf(
-      "    %s_%s_f()",
+      "    mariobox::mario_try(res, %s_%s_f())",
       tolower(method),
       name
     )
