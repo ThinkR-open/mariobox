@@ -68,3 +68,60 @@ http_error <- function(status = 500L, message = NULL) {
   x <- structure(i, class = c("http_error", "error", "condition"))
   stop(x)
 }
+
+#' Try an expression in a Plumber endpoint allowing error recovery
+#'
+#' This function is similar to [try()] and is called inside a Plumber API endpoint 
+#' definition. The function needs access to Plumbers response object.
+#' Use [http_error()] to automate the handling of HTTP status codes
+#' and differentiate between server vs. client errors.
+#'
+#' @param res The HTTP response object.
+#' @param expr An R expression to try.
+#' @param message Logical, should the report of error messages be suppressed?
+#' @param ... Other arguments passed to [try()].
+#' 
+#' @return The value of the expression if 'expr' is evaluated without error,
+#'      but an invisible object of class ‘"try-error"’ containing the
+#'      error message, and the error condition as the ‘"condition"’
+#'      attribute, if it fails.
+#'
+#' @export
+#'
+mario_try <- function(res, expr, silent = TRUE, ...) {
+    x <- try(
+        expr,
+        silent = silent,
+        ...
+    )
+    if (inherits(x, "try-error")) {
+        if (!inherits(attr(x, "condition"), "http_error")) {
+            mariobox::mario_log(
+                method = "500",
+                name = http_error_codes["500", "message"]
+            )
+            message(
+                geterrmessage()
+            )
+            res$status <- 500L
+            as.list(
+                http_error_codes["500",]
+            )
+        } else {
+            mariobox::mario_log(
+                method = attr(x, "condition")$status,
+                name = attr(x, "condition")$message
+            )
+            res$status <- attr(x, "condition")$status
+            unclass(
+                attr(x, "condition")
+            )
+        }
+    } else {
+        mariobox::mario_log(
+            method = "200",
+            name = "Success"
+        )
+        x
+    }
+}
