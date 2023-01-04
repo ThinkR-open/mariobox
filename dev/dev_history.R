@@ -41,3 +41,8 @@ devtools::test(
 .use_r_with_test("create_mariobox")
 .use_r_with_test("utils")
 .use_r_with_test("manage_endpoints")
+
+
+## CI
+
+usethis::use_github_action_check_standard()

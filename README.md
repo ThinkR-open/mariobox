@@ -9,6 +9,7 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/mariobox)](https://CRAN.R-project.org/package=mariobox)
+[![R-CMD-check](https://github.com/ThinkR-open/mariobox/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ThinkR-open/mariobox/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 \[DISCLAIMER\] This is a Work In Progress, please use at your own risk.
@@ -44,8 +45,8 @@ create_mariobox(
   open = FALSE
 )
   ── Creating dir ────────────────────────────────────────────────────────────────
-  ✔ Creating '/var/folders/5z/rm2h62lj45d332kfpj28c8zm0000gn/T/RtmpP86EN6/pipoac8920906d46/'
-  ✔ Setting active project to '/private/var/folders/5z/rm2h62lj45d332kfpj28c8zm0000gn/T/RtmpP86EN6/pipoac8920906d46'
+  ✔ Creating '/tmp/RtmpjFWgLO/pipo1d75618a38d99/'
+  ✔ Setting active project to '/tmp/RtmpjFWgLO/pipo1d75618a38d99'
   ✔ Creating 'R/'
   ✔ Writing a sentinel file '.here'
   • Build robust paths within your project via `here::here()`
@@ -55,14 +56,14 @@ create_mariobox(
   ── Copying package skeleton ────────────────────────────────────────────────────
   ✔ Copied app skeleton
   ── Done ────────────────────────────────────────────────────────────────────────
-  A new mariobox named pipoac8920906d46 was created at /private/var/folders/5z/rm2h62lj45d332kfpj28c8zm0000gn/T/RtmpP86EN6/pipoac8920906d46 .
+  A new mariobox named pipo1d75618a38d99 was created at /tmp/RtmpjFWgLO/pipo1d75618a38d99 .
 ```
 
 By default, you’ll find the following structure:
 
 ``` r
 fs::dir_tree(path_pipo)
-  /var/folders/5z/rm2h62lj45d332kfpj28c8zm0000gn/T//RtmpP86EN6/pipoac8920906d46
+  /tmp/RtmpjFWgLO/pipo1d75618a38d99
   ├── DESCRIPTION
   ├── NAMESPACE
   ├── R
@@ -95,7 +96,7 @@ then do a little bit of its magic and parse this YAML to build the
          health_get:
            methods: GET
            path: /health
-           handler: health
+           handler: get_health
 
 ### Add/Remove endpoints
 
@@ -148,7 +149,7 @@ add_get(
 
 ``` r
 fs::dir_tree(path_pipo)
-  /var/folders/5z/rm2h62lj45d332kfpj28c8zm0000gn/T//RtmpP86EN6/pipoac8920906d46
+  /tmp/RtmpjFWgLO/pipo1d75618a38d99
   ├── DESCRIPTION
   ├── NAMESPACE
   ├── R
@@ -179,7 +180,7 @@ The YALML is automatically updated:
          health_get:
            methods: GET
            path: /health
-           handler: health
+           handler: get_health
          allo_get:
            methods: GET
            path: /allo
@@ -200,7 +201,7 @@ remove_endpoint(
 
 ``` r
 fs::dir_tree(path_pipo)
-  /var/folders/5z/rm2h62lj45d332kfpj28c8zm0000gn/T//RtmpP86EN6/pipoac8920906d46
+  /tmp/RtmpjFWgLO/pipo1d75618a38d99
   ├── DESCRIPTION
   ├── NAMESPACE
   ├── R
@@ -230,7 +231,7 @@ The YALML is automatically updated:
          health_get:
            methods: GET
            path: /health
-           handler: health
+           handler: get_health
          hey_get:
            methods: GET
            path: /hey
@@ -256,8 +257,8 @@ your function.
 This format might seem weird, but the idea is to separate the concerns
 in the following format:
 
--   METHOD_NAME() will handle the http elements (login, headers..)
--   METHOD_NAME_f() will be a standard function returning data.
+- METHOD_NAME() will handle the http elements (login, headers..)
+- METHOD_NAME_f() will be a standard function returning data.
 
 That way, you can handle the data manipulation function just like a
 plain standard one, test it, interact with it, etc, without having to
@@ -279,7 +280,7 @@ can deploy using this file.
 
 ``` r
 build_plumber_file(pkg = path_pipo)
-  ℹ Loading pipoac8920906d46
+  ℹ Loading pipo1d75618a38d99
   ✔ plumber.R file created
 ```
 
@@ -293,7 +294,7 @@ This will produce the following file:
        
        
       #* @get /health
-      health
+      get_health
        
       #* @get /hey
       get_hey
