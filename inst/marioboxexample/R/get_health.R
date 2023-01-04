@@ -5,7 +5,7 @@
 get_health <- function(req, res) {
   mariobox::mario_log(
     method = "GET",
-        name = "health"
+    name = "health"
   )
   get_health_f()
 }

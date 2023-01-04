@@ -29,6 +29,7 @@ cat_mariobox_yaml <- function(path_pipo) {
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/mariobox)](https://CRAN.R-project.org/package=mariobox)
+[![R-CMD-check](https://github.com/ThinkR-open/mariobox/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ThinkR-open/mariobox/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 [DISCLAIMER] This is a Work In Progress, please use at your own risk. 

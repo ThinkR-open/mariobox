@@ -1,5 +1,5 @@
-test_that("new_api() works", {
-  api <- new_api()
+test_that("generate_api() works", {
+  api <- generate_api()
   expect_s3_class(
     api,
     c("Plumber", "Hookable", "R6")
