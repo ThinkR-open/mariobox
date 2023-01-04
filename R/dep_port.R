@@ -1,3 +1,5 @@
+#' @noRd
+#' @importFrom utils file.edit
 usethis_use_r <- function(
   name,
   pkg = ".",
@@ -24,6 +26,8 @@ usethis_use_r <- function(
     file.edit(name)
   }
 }
+#' @noRd
+#' @importFrom utils file.edit
 usethis_use_test <- function(
   name = NULL,
   pkg = ".",

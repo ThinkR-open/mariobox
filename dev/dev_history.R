@@ -23,6 +23,19 @@ devtools::check()
 
 devtools::test()
 
+
+## Project template
+
+marioboxexample_path <- normalizePath("inst/marioboxexample/")
+
+attachment::att_amend_desc(
+  path = marioboxexample_path
+)
+
+devtools::test(
+  pkg = marioboxexample_path
+)
+
 ### Setup ----------------------------------------------------------------------
 
 .use_r_with_test("create_mariobox")
