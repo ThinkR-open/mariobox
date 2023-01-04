@@ -1,6 +1,5 @@
 
 is_properly_populated_mariobox <- function(path) {
-
   # All files excepts *.Rproj which changes based on the project name
   expected_files <- c(
     "DESCRIPTION",

@@ -5,9 +5,14 @@
 attachment::att_amend_desc(
   extra.suggests = c(
     # Those packages are needed for test on marioboxexample to work
-    "plumber",
     "httr",
-    "yaml",
+    # Extra dev dependencies
+    "pkgload",
+    NULL
+  ), 
+  pkg_ignore = c(
+    # Extra dev dependencies
+    "pkgload",
     NULL
   )
 )

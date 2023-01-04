@@ -9,7 +9,6 @@ test_that("Managing endpoints", {
   )
 
   withr::with_dir(dummy_mariobox_path, {
-
     # Adding endpoint
     mariobox_yaml_path <- "inst/mariobox.yml"
     endpoint_name <- "michel"

@@ -12,6 +12,7 @@ Imports:
     cli,
     fs,
     here,
+    plumber,
     rlang,
     rstudioapi,
     usethis,
@@ -19,11 +20,11 @@ Imports:
     yaml
 Suggests: 
     httr,
-    plumber,
+    pkgload,
     rcmdcheck,
     testthat (>= 3.0.0),
     withr
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
