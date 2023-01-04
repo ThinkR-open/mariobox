@@ -36,7 +36,6 @@ create_mariobox <- function(
   overwrite = FALSE,
   package_name = basename(path)
 ) {
-
   # if (check_name) {
   #   cat_rule("Checking package name")
   #   getFromNamespace("check_package_name", "usethis")(package_name)

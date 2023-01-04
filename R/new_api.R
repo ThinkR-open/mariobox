@@ -1,5 +1,5 @@
 #' Launch the API
-#' 
+#'
 #' @param yaml_file path to the yaml
 #' @importFrom plumber Plumber
 #' @importFrom yaml read_yaml
