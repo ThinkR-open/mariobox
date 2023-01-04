@@ -5,10 +5,14 @@
 #'
 #' @export
 run_api <- function() {
+  generate_api()$run()
+}
+
+generate_api <- function() {
   mariobox::new_api(
     yaml_file = system.file(
       "mariobox.yml",
       package = "marioboxexample"
     )
-  )$run()
+  )
 }

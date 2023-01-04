@@ -7,9 +7,10 @@ is_properly_populated_mariobox <- function(path) {
     "LICENSE.md",
     "dev/run_dev.R",
     "inst/mariobox.yml",
+    "man/get_health.Rd",
     "man/run_api.Rd",
     "NAMESPACE",
-    "R/fct_health.R",
+    "R/get_health.R",
     "R/run_plumber.R",
     "tests/testthat.R",
     "tests/testthat/test-health.R",
@@ -25,6 +26,8 @@ is_properly_populated_mariobox <- function(path) {
 
   actual_files <- list.files(path, recursive = TRUE)
 
+  # browser()
+  # waldo::compare(sort(expected_files), sort(actual_files))
   identical(sort(expected_files), sort(actual_files))
 }
 
@@ -46,12 +49,12 @@ path_pkg <- create_mariobox(
   open = FALSE
 )
 
-usethis::with_project(dummy_mariobox_path, {
-  test_that("create_mariobox() works", {
+test_that("create_mariobox() works", {
+  usethis::with_project(dummy_mariobox_path, {
     usethis::use_mit_license(copyright_holder = "Babar")
 
     check_output <- rcmdcheck::rcmdcheck(
-      # path = dummy_mariobox_path,
+      path = dummy_mariobox_path,
       quiet = TRUE,
       args = c("--no-manual")
     )
