@@ -20,8 +20,8 @@ Imports:
     yaml
 Suggests: 
     httr,
-    pkgload,
     rcmdcheck,
+    pkgload,
     testthat (>= 3.0.0),
     withr
 Config/testthat/edition: 3

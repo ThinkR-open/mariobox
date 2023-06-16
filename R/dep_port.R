@@ -23,7 +23,7 @@ usethis_use_r <- function(
     path = name
   )
   if (open) {
-    file.edit(name)
+    utils::file.edit(name)
   }
 }
 #' @noRd
@@ -58,7 +58,7 @@ usethis_use_test <- function(
   write_there("  expect_equal(2 * 2, 4)")
   write_there("})")
   if (open) {
-    file.edit(name)
+    utils::file.edit(name)
   }
 }
 
