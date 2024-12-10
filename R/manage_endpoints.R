@@ -47,9 +47,15 @@ add_endpoint <- function(
   open = TRUE,
   pkg = "."
 ) {
+  clean_name <- gsub(
+    "/",
+    "_",
+    name
+  )
+
   name_yaml <- sprintf(
     "%s_%s",
-    name,
+    clean_name,
     tolower(method)
   )
 
@@ -66,7 +72,7 @@ add_endpoint <- function(
   fct_name <- sprintf(
     "%s_%s",
     tolower(method),
-    name
+    clean_name
   )
 
   if (is.null(yml$handles[[name_yaml]])) {
@@ -90,7 +96,6 @@ add_endpoint <- function(
     mariobox_yaml_path
   )
 
-
   usethis_use_r(
     name = fct_name,
     open = open,
@@ -110,9 +115,10 @@ add_endpoint <- function(
     sprintf(
       "#' %s %s",
       method,
-      name
+      clean_name
     )
   )
+
   write_there("#' ")
   write_there("#' @param req,res HTTP objects")
   write_there("#' ")
@@ -120,9 +126,8 @@ add_endpoint <- function(
   write_there("#'  ")
   write_there(
     sprintf(
-      "%s_%s <- function(req, res){",
-      tolower(method),
-      name
+      "%s <- function(req, res){",
+      fct_name
     )
   )
   write_there(
@@ -154,7 +159,7 @@ add_endpoint <- function(
     sprintf(
       "#' %s %s internal",
       method,
-      name
+      fct_name
     )
   )
   write_there("#' ")
@@ -162,9 +167,8 @@ add_endpoint <- function(
   write_there("#'  ")
   write_there(
     sprintf(
-      "%s_%s_f <- function(){",
-      tolower(method),
-      name
+      "%s_f <- function(){",
+      fct_name
     )
   )
   write_there("    return('ok')")
@@ -175,8 +179,8 @@ add_endpoint <- function(
     open = open,
     pkg = pkg
   )
-
   cat_green_tick("Endpoint added")
+
 }
 
 #' @name manage_endpoints
