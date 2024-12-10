@@ -1,15 +1,6 @@
 test_that("Managing endpoints", {
-  path_dummy <- tempfile(pattern = "dummy")
-  dir.create(path_dummy)
-
-  dummy_mariobox_path <- file.path(path_dummy, "pipo")
-  path_pkg <- create_mariobox(
-    path = dummy_mariobox_path,
-    open = FALSE
-  )
-
-  withr::with_dir(dummy_mariobox_path, {
-    # Adding endpoint
+  run_quietly_in_a_dummy_mariobox({
+     # Adding endpoint
     mariobox_yaml_path <- "inst/mariobox.yml"
     endpoint_name <- "michel"
     r_file <- sprintf("R/get_%s.R", endpoint_name)
@@ -127,6 +118,4 @@ test_that("Managing endpoints", {
       default_yaml
     )
   })
-
-  dir_remove(path_dummy)
 })

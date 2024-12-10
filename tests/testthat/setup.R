@@ -10,12 +10,7 @@ run_quietly_in_a_dummy_mariobox <- function(expr) {
   withr::with_options(
     c("usethis.quiet" = TRUE),
     {
-      dummy_mariobox <- tempdir()
-      dummy_mariobox <- create_mariobox(
-        dummy_mariobox,
-        overwrite = TRUE,
-        open = FALSE
-      )
+      dummy_mariobox <- create_dummy_mariobox()
       withr::with_dir(
         dummy_mariobox,
         expr
@@ -29,5 +24,15 @@ dir_remove <- function(path) {
     x = path,
     recursive = TRUE,
     force = TRUE
+  )
+}
+
+create_dummy_mariobox <- function(){
+  copy_empty_mariobox(
+    file.path(
+      tempdir(),
+      "dummymariobox"
+    ),
+    "dummymariobox"
   )
 }

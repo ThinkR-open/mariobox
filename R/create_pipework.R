@@ -36,11 +36,6 @@ create_mariobox <- function(
   overwrite = FALSE,
   package_name = basename(path)
 ) {
-  # if (check_name) {
-  #   cat_rule("Checking package name")
-  #   getFromNamespace("check_package_name", "usethis")(package_name)
-  #   cat_green_tick("Valid package name")
-  # }
 
   if (dir.exists(path)) {
     if (!isTRUE(overwrite)) {
@@ -65,6 +60,41 @@ create_mariobox <- function(
   }
 
   cat_rule("Copying package skeleton")
+  copy_empty_mariobox(
+    path,
+    package_name
+  )
+  cat_green_tick("Copied app skeleton")
+
+  cat_rule("Done")
+  cat_line(
+    paste0(
+      "A new mariobox named ",
+      package_name,
+      " was created at ",
+      normalizePath(path),
+      " .\n" # ,
+      # "To continue working on your app, start editing the 01_start.R file."
+    )
+  )
+
+  if (isTRUE(open)) {
+    if (rstudioapi::isAvailable() & rstudioapi::hasFun("openProject")) {
+      rstudioapi::openProject(path = path)
+    } else {
+      setwd(path)
+    }
+  }
+
+  return(
+    invisible(
+      normalizePath(path)
+    )
+  )
+}
+
+
+copy_empty_mariobox <- function(path, package_name){
   marioboxexample_path <- mariobox_sys("marioboxexample")
   dir_copy(
     path = marioboxexample_path,
@@ -94,31 +124,5 @@ create_mariobox <- function(
       replace = package_name
     )
   }
-  cat_green_tick("Copied app skeleton")
-
-  cat_rule("Done")
-  cat_line(
-    paste0(
-      "A new mariobox named ",
-      package_name,
-      " was created at ",
-      normalizePath(path),
-      " .\n" # ,
-      # "To continue working on your app, start editing the 01_start.R file."
-    )
-  )
-
-  if (isTRUE(open)) {
-    if (rstudioapi::isAvailable() & rstudioapi::hasFun("openProject")) {
-      rstudioapi::openProject(path = path)
-    } else {
-      setwd(path)
-    }
-  }
-
-  return(
-    invisible(
-      normalizePath(path)
-    )
-  )
+  return(path)
 }
