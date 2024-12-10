@@ -58,9 +58,8 @@ create_mariobox <- function(
     }
   } else {
     cat_rule("Creating dir")
-    usethis::create_project(
-      path = path,
-      open = FALSE,
+    fs::dir_create(
+      path = path
     )
     cat_green_tick("Created package directory")
   }
