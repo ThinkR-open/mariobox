@@ -13,7 +13,8 @@ run_quietly_in_a_dummy_mariobox <- function(expr) {
       dummy_mariobox <- tempdir()
       dummy_mariobox <- create_mariobox(
         dummy_mariobox,
-        overwrite = TRUE
+        overwrite = TRUE,
+        open = FALSE
       )
       withr::with_dir(
         dummy_mariobox,
