@@ -1,6 +1,6 @@
 Package: mariobox
 Title: A Framework For Packaging {plumber} APIs
-Version: 0.0.1.9001
+Version: 0.0.1.9002
 Authors@R: c(
     person("Antoine", "Languillaume", , "antoine@thinkr.fr", role = "aut"),
     person("Colin", "Fay", , "colin@thinkr.fr", role = c("aut", "cre"))
