@@ -11,9 +11,9 @@ mario_try(res, expr, silent = TRUE, ...)
 
 \item{expr}{An R expression to try.}
 
-\item{...}{Other arguments passed to \code{\link[=try]{try()}}.}
+\item{silent}{Logical, should the report of error messages be suppressed?}
 
-\item{message}{Logical, should the report of error messages be suppressed?}
+\item{...}{Other arguments passed to \code{\link[=try]{try()}}.}
 }
 \value{
 The value of the expression if 'expr' is evaluated without error,

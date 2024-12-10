@@ -1,5 +1,5 @@
 
-#' Create a {mariobox} project to package a {plumber} API
+#' Create a 'mariobox' project to package a 'plumber' API
 #'
 #' This function will create a prepopulated package
 #' with all the necessary elements to publish a {plumber} API as a package.
@@ -8,7 +8,7 @@
 #' the package in. The folder name will also be used as the package name.
 #' @param open A logical. Should the new project be open?
 #' @param overwrite A logical. Should the already existing project be overwritten ?
-#' @param package_name Package name to use. By default, {mariobox} uses
+#' @param package_name Package name to use. By default, 'mariobox' uses
 #' `basename(path)`. If `path == '.'` & `package_name` is not explicitly set,
 #' then `basename(getwd())` will be used.
 #'
