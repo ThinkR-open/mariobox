@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_pipework.R
 \name{create_mariobox}
 \alias{create_mariobox}
-\title{Create a {mariobox} project to package a {plumber} API}
+\title{Create a 'mariobox' project to package a 'plumber' API}
 \usage{
 create_mariobox(
   path,
@@ -19,7 +19,7 @@ the package in. The folder name will also be used as the package name.}
 
 \item{overwrite}{A logical. Should the already existing project be overwritten ?}
 
-\item{package_name}{Package name to use. By default, {mariobox} uses
+\item{package_name}{Package name to use. By default, 'mariobox' uses
 \code{basename(path)}. If \code{path == '.'} & \code{package_name} is not explicitly set,
 then \code{basename(getwd())} will be used.}
 }

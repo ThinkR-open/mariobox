@@ -1,6 +1,6 @@
 Package: mariobox
 Title: A Framework For Packaging {plumber} APIs
-Version: 0.0.0.9000
+Version: 0.0.1.9001
 Authors@R: c(
     person("Antoine", "Languillaume", , "antoine@thinkr.fr", role = "aut"),
     person("Colin", "Fay", , "colin@thinkr.fr", role = c("aut", "cre"))
@@ -8,7 +8,7 @@ Authors@R: c(
 Description: A framework for building robust {plumber} APIs. This package
     contains a series of tools to build {plumber} APIs as packages.
 License: MIT + file LICENSE
-Imports: 
+Imports:
     cli,
     fs,
     here,
@@ -18,7 +18,7 @@ Imports:
     usethis,
     utils,
     yaml
-Suggests: 
+Suggests:
     httr,
     rcmdcheck,
     pkgload,
